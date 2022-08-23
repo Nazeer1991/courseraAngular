@@ -6,9 +6,9 @@
     fxLayoutGap="10px" 
     fxLayoutGap.xs="0">
 
-  <div fxFlex="40">
+  <div fxFlex="40" *ngIf = "dish">
     <!-- <p>Display the details of the Dish here</p> -->
-    <div fxFlex *ngIf = "dish">
+    <div fxFlex >
       <mat-card>
         <mat-card-header>
           <mat-card-title>
@@ -20,9 +20,16 @@
           <p>{{dish.description}} </p>
         </mat-card-content>
         <mat-card-actions>
+          <button mat-button [routerLink]="['/dishdetail',prev]">
+            <span class="fa fa-chevron-left fa-lg"></span>
+          </button>
           <button mat-button (click)="goBack()">BACK</button>
           <button mat-button>LIKE</button>
           <button mat-button>SHARE</button>
+          <span class="flex-spacer"></span>
+          <button mat-button [routerLink]="['/dishdetail',next]">
+            <span class="fa fa-chevron-right"></span>
+          </button>
         </mat-card-actions>
       </mat-card>
     </div>
@@ -31,14 +38,15 @@
   <div fxFlex="40" *ngIf = "dish">
     <!-- <p>Display the list of comments here</p> -->
     
-      
-        <h2>Comments</h2>
-        <mat-grid-list cols="1" rowHeight="100px">
-          <mat-list *ngFor="let Com of dish.comments"> 
-            <p>{{Com.comment}}<br>{{Com.rating}} stars<br>--{{Com.author}} {{Com.date | date}}</p>             
+        <mat-list>
+        <h3>Comments</h3>
+        <mat-list-item *ngFor="let Com of dish.comments">
+          <h4 matLine>{{Com.comment}}</h4>
+          <p matLine>{{Com.rating}} stars</p>
+          <p matLine>--{{Com.author}} {{Com.date | date}}</p>             
             
-          </mat-list>
-        </mat-grid-list>
+          </mat-list-item>
+        </mat-list>
     
     
   </div>
